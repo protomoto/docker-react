@@ -1,0 +1,22 @@
+version: '3'
+services:
+# Container responsible for running development server
+    web:
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3001:3000"
+        volumes:
+            - /app/node_modules
+            - .:/app
+
+# Container responsible for running tests
+    tests:
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules
+            - .:/app
+        command: ["npm", "run", "test"]
